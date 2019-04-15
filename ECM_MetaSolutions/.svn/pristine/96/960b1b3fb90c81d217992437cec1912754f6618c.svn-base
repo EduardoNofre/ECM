@@ -1,0 +1,524 @@
+package com.br.meta.ecm.view;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragGestureRecognizer;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceContext;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import com.br.meta.ecm.painel.PainelDadosProposta;
+import com.br.meta.ecm.painel.PainelAnaliseQuantitativa;
+import com.br.meta.ecm.painel.PainelComprovanteDeResidencia;
+import com.br.meta.ecm.painel.PainelDePara01;
+import com.br.meta.ecm.painel.PainelDePara02;
+import com.br.meta.ecm.painel.PainelDocumentos;
+import com.br.meta.ecm.painel.PainelExames;
+import com.br.meta.ecm.painel.PainelPropostas;
+import com.br.meta.ecm.regra.AtualizarCheckImagemNo;
+import com.br.meta.ecm.regra.AtualizarCheckImagemYes;
+
+public class ECMView implements DragGestureListener, DragSourceListener,DropTargetListener, Transferable {
+
+	static final DataFlavor[] supportedFlavors = { null };
+
+	final JPanel origem = new JPanel();
+	final JPanel destinos = new JPanel();
+	final JPanel documento = new JPanel();
+	final JPanel examesMedicos = new JPanel();
+	final JPanel comprovanteDeResidencia = new JPanel();
+	final JPanel compareImagen01 = new JPanel();
+	final JPanel compareImagen02 = new JPanel();
+	final JPanel proposta = new JPanel();
+	final static JPanel analiseQuantitativa = new JPanel();
+	final JPanel dadosDaProposta = new JPanel();
+	
+	public static String imagem = "C:\\DesenhoRetangulo\\page0.png";
+	
+	int trocaImage = 0;
+	static JLabel labelProposta;
+	static JLabel labelDocumento;
+	static JLabel labelIconimageIconExames;
+	static JLabel labelconComprovante;
+
+	static ImageIcon imageIconProposta;
+	static ImageIcon imageIconDocumento;
+	static ImageIcon imageIconComprovante;
+	static ImageIcon imageIconExames;
+
+	ECMView ecmView;
+
+	static {
+
+		try {
+
+			supportedFlavors[0] = new DataFlavor(
+					DataFlavor.javaJVMLocalObjectMimeType);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	Object object;
+
+	// Transferable methods.
+	public Object getTransferData(DataFlavor flavor) {
+
+		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+
+			return object;
+
+		} else {
+
+			return null;
+		}
+	}
+
+	public DataFlavor[] getTransferDataFlavors() {
+		return supportedFlavors;
+	}
+
+	public boolean isDataFlavorSupported(DataFlavor flavor) {
+		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
+	}
+
+	// DragGestureListener method.
+	public void dragGestureRecognized(DragGestureEvent ev) {
+		ev.startDrag(null, this, this);
+	}
+
+	// DragSourceListener methods.
+	public void dragDropEnd(DragSourceDropEvent ev) {
+	}
+
+	public void dragEnter(DragSourceDragEvent ev) {
+	}
+
+	public void dragExit(DragSourceEvent ev) {
+
+	}
+
+	public void dragOver(DragSourceDragEvent ev) {
+		object = ev.getSource();
+	}
+
+	public void dropActionChanged(DragSourceDragEvent ev) {
+	}
+
+	// DropTargetListener methods.
+	public void dragEnter(DropTargetDragEvent event) {
+
+	}
+
+	public void dragExit(DropTargetEvent event) {
+	}
+
+	public void dragOver(DropTargetDragEvent event) {
+		dropTargetDrag(event);
+	}
+
+	public void dropActionChanged(DropTargetDragEvent event) {
+		dropTargetDrag(event);
+	}
+
+	void dropTargetDrag(DropTargetDragEvent event) {
+		event.acceptDrag(event.getDropAction());
+	}
+
+	public void drop(DropTargetDropEvent event) {
+
+		event.acceptDrop(event.getDropAction());//
+
+		try {
+
+			Object target = event.getSource(); //
+
+			Object source = event.getTransferable().getTransferData(supportedFlavors[0]);
+
+			Component component = ((DragSourceContext) source).getComponent();
+
+			Container origemDragAndDrop = component.getParent();
+
+			Container destinoDragAndDrop = (Container) ((DropTarget) target).getComponent();
+
+			if (!(destinoDragAndDrop.getName().equals("area1") || destinoDragAndDrop.getName().equals("area2"))) {
+
+				destinoDragAndDrop.add(component);
+
+				this.updateImageCheckYes(destinoDragAndDrop.getName());
+
+				this.updateImageCheckNo(origemDragAndDrop.getName(),origemDragAndDrop.getComponentCount());
+
+			} else {
+
+				destinoDragAndDrop.removeAll();
+
+				JLabel imageArwaDeVerificacao = (JLabel) component;
+
+				ImageIcon img = new ImageIcon(imageArwaDeVerificacao.getIcon().toString());
+
+				img.setImage(img.getImage().getScaledInstance(540, 855, 800));
+
+				JLabel adcionaImagem = new JLabel(img);
+
+				EventQueue.invokeLater(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+
+					}
+				});
+
+				destinoDragAndDrop.add(adcionaImagem);
+
+			}
+
+			origemDragAndDrop.revalidate();
+
+			origemDragAndDrop.repaint();
+
+			destinoDragAndDrop.revalidate();
+
+			destinoDragAndDrop.repaint();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		event.dropComplete(true);
+	}
+
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Este metodo carrega os contrato nos paineis, buscando em um diretorio especificio.
+	 * 
+	 */
+	
+	private JScrollPane contrato() {
+
+		origem.setLayout(new GridLayout(0, 1));
+
+		origem.setToolTipText(" Origem ");
+
+		origem.setName("OrigemPainel");
+
+		File imageDiretorio = new File("C:\\DesenhoRetangulo\\");
+
+		File files[] = imageDiretorio.listFiles();
+
+		DragSource dragSource = new DragSource();
+
+		ecmView = new ECMView();
+
+		int contadorDePaginas = 1;
+
+		for (File arq : files) {
+
+			ImageIcon img = new ImageIcon(arq.getAbsolutePath());
+
+			img.setImage(img.getImage().getScaledInstance(100, 150, 100));
+
+			JLabel adcionaImagem = new JLabel(img);
+
+			DragSource ds1 = new DragSource();
+
+			DragGestureRecognizer dragRecognizer = dragSource.createDefaultDragGestureRecognizer(adcionaImagem,DnDConstants.ACTION_MOVE, ecmView);
+
+			origem.add(adcionaImagem);
+
+			adcionaImagem.setToolTipText(String.valueOf(contadorDePaginas));
+
+			contadorDePaginas++;
+
+		}
+
+		DropTarget dropTargetOrigem = new DropTarget(origem,DnDConstants.ACTION_MOVE, ecmView);
+
+		JScrollPane scrollPaneOrigem = new JScrollPane(origem);
+
+		scrollPaneOrigem.setViewportView(origem);
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border,"Contrato", 2, TitledBorder.CENTER);
+
+		scrollPaneOrigem.setBackground(new java.awt.Color(255, 255, 255));
+
+		scrollPaneOrigem.setBorder(titledBorder);
+
+		scrollPaneOrigem.setToolTipText("Image");
+
+		scrollPaneOrigem.setBounds(1720, 60, 150, 845);
+
+		int height = (int) origem.getPreferredSize().getHeight();
+
+		scrollPaneOrigem.getVerticalScrollBar().setValue(2500);
+
+		return scrollPaneOrigem;
+	}
+
+	
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel que traz a informaçoes da proposta.
+	 */
+	private JScrollPane propostasPainel() {
+
+		PainelPropostas propostas = new PainelPropostas();
+
+		return propostas.proposta(ecmView);
+
+	}
+
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel que representa os documentos do cliente tipo rg - cpf
+	 *  
+	 */
+	private JScrollPane documentosPainel() {
+
+		PainelDocumentos painelDocumentos = new PainelDocumentos();
+
+		return painelDocumentos.documentos(ecmView);
+	}
+
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel que representa os exames medicos do cliente
+	 *  
+	 */
+	private JScrollPane examesMedicosPainel() {
+
+		PainelExames painelExames = new PainelExames();
+
+		return painelExames.examesMedicosPainel(ecmView);
+
+	}
+
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel que representa o comprovante de endereço do cliente
+	 *  
+	 */
+	private JScrollPane comprovanteDeResidenciaPainel() {
+
+		PainelComprovanteDeResidencia comprovanteDeResidencia = new PainelComprovanteDeResidencia();
+
+		return comprovanteDeResidencia.comprovante(ecmView);
+	}
+
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel 01 utilizado para fazer compração dos dados do cliente .
+	 * @throws IOException 
+	 *  
+	 */
+	private PainelDePara01 compareImagensPainel01() throws IOException {
+
+		PainelDePara01 dePara01 = new PainelDePara01();
+
+		return dePara01.compara01(ecmView);
+	}
+
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel que indica quais os documento que o analista identificou ate o presente momento.
+	 *  
+	 */
+	private static JScrollPane analiseQuantitativaPainel() {
+
+		PainelAnaliseQuantitativa quantitativa = new PainelAnaliseQuantitativa();
+
+		return quantitativa.analiseQuantitativa();
+
+	}
+
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel que traz as informaçoes da proposta.
+	 *  
+	 */
+	private JScrollPane dadosDaPropostaPainel() {
+
+		PainelDadosProposta dadosDaProposta = new PainelDadosProposta();
+
+		return dadosDaProposta.dadosDaProposta();
+	}
+
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel 02 utilizado para fazer compração dos dados do cliente .
+	 *  
+	 */
+	private JScrollPane compareImagensPainel02() {
+
+		PainelDePara02 dePara02 = new PainelDePara02();
+
+		return dePara02.compara02(ecmView);
+	}
+
+	
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel Analise Quantitativa faz a troca de das imagens Yes ou NO de acordo com o drag drop.
+	 *  
+	 */
+	
+	public void updateImageCheckYes(String panelUpdateImage) {
+
+		AtualizarCheckImagemYes imagem = new AtualizarCheckImagemYes();
+
+		imagem.atualizaImgYes(panelUpdateImage);
+
+	}
+
+	
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 * Painel Analise Quantitativa carrega as imagem no painel NO assim que o sistema é aberto.
+	 *  
+	 */
+	public void updateImageCheckNo(String panelUpdateImage,
+			int quantidadeDeComponentes) {
+
+		AtualizarCheckImagemNo atualizarCheckImagemNo = new AtualizarCheckImagemNo();
+
+		atualizarCheckImagemNo.atualizaImgNo(panelUpdateImage,quantidadeDeComponentes);
+	}
+
+	/**
+	 * 
+	 * @return JPanel
+	 * 
+	 * Painel de fundo
+	 */
+	private static JPanel fundoPainel() {
+
+		final JPanel pss = new JPanel() {
+
+			@Override
+			public Dimension getPreferredSize() {
+
+				return new Dimension(100, 300);
+			}
+		};
+
+		pss.setBackground(new java.awt.Color(255, 255, 255));
+		pss.setAutoscrolls(true);
+		Border linhaDaBorda = BorderFactory.createBevelBorder(BevelBorder.RAISED, Color.DARK_GRAY, Color.DARK_GRAY);
+		pss.setBorder(linhaDaBorda);
+		pss.setMaximumSize(new Dimension(100, 100));
+		pss.setAlignmentX(10);
+		pss.setAlignmentY(10);
+
+		return pss;
+	}
+
+	public static JFrame criarFrame() throws IOException {
+
+		JFrame frame = new JFrame();
+
+		ECMView andDrop = new ECMView();
+
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+		frame.setTitle("xxx - Meta Solutions");
+
+		JScrollPane origemJsp = andDrop.contrato();
+		JScrollPane propostasPainelJsp = andDrop.propostasPainel();
+		JScrollPane documentoJsp = andDrop.documentosPainel();
+		JScrollPane examesJsp = andDrop.examesMedicosPainel();
+		JScrollPane comprovanteJsp = andDrop.comprovanteDeResidenciaPainel();
+		
+		PainelDePara01 compareImagens01Jsp = andDrop.compareImagensPainel01();
+		
+		JScrollPane compareImagens02Jsp = andDrop.compareImagensPainel02();
+		
+		JScrollPane analiseQuantitativaJsp = andDrop.analiseQuantitativaPainel();
+		
+		JScrollPane dadosDaPropostaJsp = andDrop.dadosDaPropostaPainel();
+		
+		JPanel fundoJsp = andDrop.fundoPainel();
+
+		frame.add(analiseQuantitativaJsp);
+		
+		frame.add(dadosDaPropostaJsp);
+
+		frame.add(origemJsp);
+		frame.add(propostasPainelJsp);
+		frame.add(documentoJsp);
+		frame.add(examesJsp);
+		frame.add(comprovanteJsp);
+		frame.add(comprovanteJsp);
+		frame.getContentPane().add(PainelDePara01.scrollpaneControle);
+
+		frame.setGlassPane(compareImagens01Jsp);
+		frame.add(compareImagens02Jsp);
+		
+		compareImagens01Jsp.setVisible(true);	
+
+		frame.add(fundoJsp);
+
+		return frame;
+
+	}
+
+	public static void main(String[] args) throws IOException {
+
+		JFrame frame = criarFrame();
+		frame.setSize(1900, 1000);
+		frame.setVisible(true);
+	}
+}

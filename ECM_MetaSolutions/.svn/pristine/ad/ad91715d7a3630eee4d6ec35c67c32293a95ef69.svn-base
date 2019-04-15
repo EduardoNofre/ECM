@@ -1,0 +1,91 @@
+package com.br.meta.ecm.painel;
+
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.TextField;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import org.w3c.dom.Text;
+
+public class PainelDadosProposta {
+
+	final JPanel dadosDaProposta = new JPanel();
+	
+
+	public JScrollPane dadosDaProposta() {
+		
+		Button salvar = new Button("Salvar");
+		
+		Label numeroProposta = new Label("Numero proposta");
+		
+		Label Beneficiario = new Label("Beneficiario");
+		
+		Label dataIinicioVigencia = new Label("Inicio Vigencia");
+		
+		Label dataFimVigencia = new Label("Fim Vigencia");
+		
+		TextField numeroPropostaText = new TextField();
+		
+		TextField BeneficiarioText = new TextField();
+		
+		TextField dataIinicioVigenciaText = new TextField();
+		
+		TextField dataFimVigenciaText = new TextField();
+		
+		
+
+		dadosDaProposta.setLayout(new GridLayout(10, 10));
+
+		dadosDaProposta.setAutoscrolls(true);
+
+		dadosDaProposta.setName("dadosDaProposta");
+
+		dadosDaProposta.setToolTipText(" Informação da Proposta ");
+		
+		salvar.setBounds(20, 600, 310, 340);
+		
+		dadosDaProposta.add(numeroProposta);
+		dadosDaProposta.add(numeroPropostaText);
+		
+		dadosDaProposta.add(Beneficiario);
+		dadosDaProposta.add(BeneficiarioText);
+		
+		dadosDaProposta.add(dataIinicioVigencia);
+		dadosDaProposta.add(dataIinicioVigenciaText);
+		
+		dadosDaProposta.add(dataFimVigencia);
+		dadosDaProposta.add(dataFimVigenciaText);
+		
+		dadosDaProposta.add(salvar);
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border, " Informação da Proposta ",2,TitledBorder.CENTER);	
+
+		JScrollPane scrollDadosDaProposta = new JScrollPane(dadosDaProposta);
+
+		scrollDadosDaProposta.setBorder(titledBorder);
+
+		scrollDadosDaProposta.setViewportView(dadosDaProposta);
+
+		scrollDadosDaProposta.setAutoscrolls(true);
+
+		scrollDadosDaProposta.setName("dadosDaProposta");
+
+		scrollDadosDaProposta.setBounds(20, 600, 310, 340);
+
+		scrollDadosDaProposta.setAlignmentX(10);
+
+		scrollDadosDaProposta.setAlignmentY(10);
+
+		return scrollDadosDaProposta;
+	}
+
+}

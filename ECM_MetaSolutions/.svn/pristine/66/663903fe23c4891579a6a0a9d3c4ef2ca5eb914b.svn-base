@@ -1,0 +1,124 @@
+package com.br.meta.ecm.painel;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+public class PainelAnaliseQuantitativa {
+	
+	final static JPanel analiseQuantitativa = new JPanel();
+	
+	public static JLabel labelProposta;
+	public static JLabel labelDocumento;
+	public static JLabel labelIconimageIconExames;
+	public static JLabel labelconComprovante;	
+	
+	public static ImageIcon imageIconProposta;
+	public static ImageIcon imageIconDocumento;
+	public static ImageIcon imageIconComprovante;
+	public static ImageIcon imageIconExames;
+
+	public JScrollPane analiseQuantitativa() {
+
+
+		analiseQuantitativa.setLayout(new GridLayout(4,1));
+
+		analiseQuantitativa.setAutoscrolls(true);
+
+		analiseQuantitativa.setName("analiseQuantitativaPainel");
+
+		analiseQuantitativa.setToolTipText("Analise Quantitativa");		
+		
+
+		//***********************Proposta****************************************************************************************************
+
+
+		imageIconProposta = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconProposta.setImage(imageIconProposta.getImage().getScaledInstance(28, 28, 10));
+
+		labelProposta = new JLabel(imageIconProposta);
+
+		analiseQuantitativa.add(labelProposta);		
+
+		JLabel TextProposta= new JLabel("validação da proposta");
+
+		analiseQuantitativa.add(TextProposta);
+
+		//********************Documento*******************************************************************************************************	
+
+
+		imageIconDocumento = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconDocumento.setImage(imageIconDocumento.getImage().getScaledInstance(28, 28, 10));
+
+		labelDocumento = new JLabel(imageIconDocumento);
+
+		analiseQuantitativa.add(labelDocumento);		
+
+		JLabel TextDocumento = new JLabel("validação da documento");
+
+		analiseQuantitativa.add(TextDocumento);
+
+
+		//********************Comprovante******************************************************************************************************		
+
+		imageIconComprovante = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconComprovante.setImage(imageIconComprovante.getImage().getScaledInstance(28, 28, 10));
+
+		labelconComprovante = new JLabel(imageIconComprovante);
+
+		analiseQuantitativa.add(labelconComprovante);		
+
+		JLabel TextComprovante = new JLabel("validação do comprovante");
+
+		analiseQuantitativa.add(TextComprovante);
+
+
+		//********************Exames*******************************************************************************************************************	
+
+
+		imageIconExames = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconExames.setImage(imageIconExames.getImage().getScaledInstance(28, 28, 10));
+
+		labelIconimageIconExames = new JLabel(imageIconExames);
+
+		analiseQuantitativa.add(labelIconimageIconExames);		
+
+		JLabel TextExames = new JLabel("validação da Exames");
+
+		analiseQuantitativa.add(TextExames);
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border, " Analise Quantitativa ",2,TitledBorder.CENTER);	
+
+		JScrollPane scrollAnaliseQuantitativa = new JScrollPane(analiseQuantitativa);
+
+		scrollAnaliseQuantitativa.setBorder(titledBorder);
+
+		scrollAnaliseQuantitativa.setViewportView(analiseQuantitativa);
+
+		scrollAnaliseQuantitativa.setAutoscrolls(true);
+
+		scrollAnaliseQuantitativa.setName("analiseQuantitativa");
+
+		scrollAnaliseQuantitativa.setBounds(20, 115, 310, 450);
+
+		scrollAnaliseQuantitativa.setAlignmentX(10);
+
+		scrollAnaliseQuantitativa.setAlignmentY(10);
+
+		return scrollAnaliseQuantitativa;
+	}
+
+}

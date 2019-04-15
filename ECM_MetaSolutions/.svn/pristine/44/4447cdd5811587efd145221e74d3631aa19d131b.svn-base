@@ -1,0 +1,53 @@
+package com.br.meta.ecm.painel;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import com.br.meta.ecm.view.ECMView;
+
+public class PainelDePara02 {
+	
+	JPanel compareImagen02 = new JPanel();
+
+	public JScrollPane compara02(ECMView dndListener) {
+
+		compareImagen02.setLayout(new GridLayout(0, 1));	
+
+		compareImagen02.setName("area2");
+
+		compareImagen02.setToolTipText("Area de verificação de Imagem 2");
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border, "Aera de verificação 2",2,TitledBorder.CENTER);
+
+		DropTarget dropTarget1 = new DropTarget(compareImagen02, DnDConstants.ACTION_MOVE,dndListener);
+
+		JScrollPane scrollCompareImagensPainel02 = new JScrollPane(compareImagen02);
+
+		scrollCompareImagensPainel02.setViewportView(compareImagen02);
+
+		scrollCompareImagensPainel02.setAutoscrolls(true);
+
+		scrollCompareImagensPainel02.setBorder(titledBorder);
+
+		scrollCompareImagensPainel02.setName("compareImagensPainel02");
+
+		scrollCompareImagensPainel02.setBounds(945, 40, 550, 865);
+
+		scrollCompareImagensPainel02.setAlignmentX(10);
+
+		scrollCompareImagensPainel02.setAlignmentY(10);
+
+		return scrollCompareImagensPainel02;
+	}
+
+}

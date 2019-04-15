@@ -1,0 +1,62 @@
+/**
+ * 
+ */
+package com.br.meta.ecm.view;
+
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.TextField;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+/**
+ * @author eduardo
+ *
+ */
+public class FrameLogin {
+
+	public static JFrame criarJPanelLogin() throws IOException {
+		
+		JFrame frameLogin = new JFrame();	
+		
+		JPanel  jPanelLogin = new JPanel();
+		
+		jPanelLogin.setLayout(new GridLayout(4, 4));
+		
+		jPanelLogin.setBackground(new java.awt.Color(255, 255, 255));	
+		
+		Label usuario = new Label("Usuario");	
+		TextField usuarioText = new TextField("",20);
+		Label senha = new Label("Senha");
+		TextField senhaText = new TextField("",20);	
+		
+		
+		usuario.setBounds(10, 100, 50, 10);
+		senha.setBounds(10, 100, 50, 10);
+		
+		usuarioText.setBounds(10, 100, 50, 10);
+		senhaText.setBounds(10, 100, 50, 10);
+		
+		jPanelLogin.add(usuario);
+		jPanelLogin.add(usuarioText);
+		
+		jPanelLogin.add(senha);
+		jPanelLogin.add(senhaText);
+		
+		frameLogin.add(jPanelLogin);
+		
+		return frameLogin;
+
+	}
+
+	public static void main(String[] args) throws IOException {
+		
+		JFrame frame = criarJPanelLogin();
+		frame.setSize(400, 400);
+		frame.setVisible(true);
+
+	}
+
+}

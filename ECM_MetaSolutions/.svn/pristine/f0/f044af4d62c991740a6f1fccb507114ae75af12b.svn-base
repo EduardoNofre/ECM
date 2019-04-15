@@ -1,0 +1,286 @@
+package com.br.meta.ecm.painel;
+
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+public class PainelCheckList {
+
+	final static JPanel analiseQuantitativa = new JPanel();
+
+	public static JLabel labelProposta; 
+	public static JLabel labelDocumento;
+	public static JLabel labelIconimageIconExames;
+	public static JLabel labelconComprovante;	
+
+	public static ImageIcon imageIconProposta;
+	public static ImageIcon imageIconDocumento;
+	public static ImageIcon imageIconComprovante;
+	public static ImageIcon imageIconExames;
+
+
+	public static boolean question1 = false;
+	public static boolean question2 = false;
+	public static boolean question3 = false;
+	public static boolean question4 = false;
+	public static boolean question5 = false;
+
+
+	public JScrollPane checkListQuestions() {
+
+
+		analiseQuantitativa.setLayout(new GridBagLayout());
+
+		GridBagConstraints c = new GridBagConstraints();
+
+		analiseQuantitativa.setAutoscrolls(true);
+
+		analiseQuantitativa.setName("analiseQuantitativaPainel");
+
+		analiseQuantitativa.setToolTipText("Analise Quantitativa");	
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+
+		//***********************question 01****************************************************************************************************
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		
+		c.gridwidth = GridBagConstraints.REMAINDER;
+
+
+		imageIconProposta = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconProposta.setImage(imageIconProposta.getImage().getScaledInstance(28, 28, 10));
+
+		labelProposta = new JLabel(imageIconProposta);	
+
+		final JLabel TextProposta= new JLabel("validação da proposta");
+
+		TextProposta.setBorder(border);	
+		
+		TextProposta.setName("nao");
+
+		TextProposta.setIcon(imageIconProposta);	
+
+		analiseQuantitativa.add(TextProposta,c);
+
+		TextProposta.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+
+				if(TextProposta.getName().equals("nao")){
+					
+					imageIconProposta = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 yes.png");
+
+					imageIconProposta.setImage(imageIconProposta.getImage().getScaledInstance(28, 28, 10));
+					
+					TextProposta.setName("sim");
+
+					TextProposta.setIcon(imageIconProposta);
+
+				}else{
+
+					imageIconProposta = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+					imageIconProposta.setImage(imageIconProposta.getImage().getScaledInstance(28, 28, 10));
+
+					TextProposta.setIcon(imageIconProposta);
+					
+					TextProposta.setName("nao");
+				}
+
+			}
+		});
+
+
+
+		//********************question 02*******************************************************************************************************	
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+
+		imageIconDocumento = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconDocumento.setImage(imageIconDocumento.getImage().getScaledInstance(28, 28, 10));
+
+		labelDocumento = new JLabel(imageIconDocumento);		
+
+		final JLabel TextDocumento = new JLabel("validação da documento");
+		
+		TextDocumento.setBorder(border);	
+		
+		TextDocumento.setName("nao");
+
+		TextDocumento.setIcon(imageIconDocumento);
+
+		analiseQuantitativa.add(TextDocumento,c);
+
+
+		TextDocumento.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+
+				if(TextDocumento.getName().equals("nao")){
+					
+					imageIconDocumento = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 yes.png");
+
+					imageIconDocumento.setImage(imageIconDocumento.getImage().getScaledInstance(28, 28, 10));
+
+					TextDocumento.setIcon(imageIconDocumento);	
+					
+					TextDocumento.setName("sim");
+
+				}else{
+
+					imageIconDocumento = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+					imageIconDocumento.setImage(imageIconDocumento.getImage().getScaledInstance(28, 28, 10));
+
+					TextDocumento.setIcon(imageIconDocumento);	
+					
+					TextDocumento.setName("nao");
+				}
+			}
+		});
+
+
+		//********************question 03******************************************************************************************************		
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+
+		imageIconComprovante = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconComprovante.setImage(imageIconComprovante.getImage().getScaledInstance(28, 28, 10));
+
+		labelconComprovante = new JLabel(imageIconComprovante);		
+
+		final JLabel TextComprovante = new JLabel("validação do comprovante");
+
+		TextComprovante.setIcon(imageIconProposta);
+		
+		TextComprovante.setBorder(border);
+		
+		TextComprovante.setName("nao");
+
+		analiseQuantitativa.add(TextComprovante,c);
+
+		TextComprovante.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+
+				if(TextComprovante.getName().equals("nao")){
+					
+				imageIconComprovante = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 yes.png");
+
+				imageIconComprovante.setImage(imageIconComprovante.getImage().getScaledInstance(28, 28, 10));
+
+				TextComprovante.setIcon(imageIconComprovante);	
+				
+				TextComprovante.setName("sim");
+				
+				}else{
+					
+					imageIconComprovante = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+					imageIconComprovante.setImage(imageIconComprovante.getImage().getScaledInstance(28, 28, 10));
+
+					TextComprovante.setIcon(imageIconComprovante);	
+					
+					TextComprovante.setName("nao");
+				}
+			}
+		});
+
+
+		//********************question 04*******************************************************************************************************************	
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+
+		imageIconExames = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconExames.setImage(imageIconExames.getImage().getScaledInstance(28, 28, 10));
+
+		labelIconimageIconExames = new JLabel(imageIconExames);	
+
+		final JLabel TextExames = new JLabel("validação da Exames");
+
+		TextExames.setIcon(imageIconProposta);
+		
+		TextExames.setBorder(border);
+		
+		TextExames.setName("nao");
+
+		analiseQuantitativa.add(TextExames,c);
+
+		TextExames.addMouseListener(new MouseAdapter() 
+		{
+			@Override
+			public void mouseClicked(MouseEvent e) 
+			{
+
+				if(TextExames.getName().equals("nao")){
+					
+				imageIconExames = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 yes.png");
+
+				imageIconExames.setImage(imageIconExames.getImage().getScaledInstance(28, 28, 10));
+
+				TextExames.setIcon(imageIconExames);	
+				
+				TextExames.setName("sim");
+				
+				}else{
+					
+					imageIconExames = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+					imageIconExames.setImage(imageIconExames.getImage().getScaledInstance(28, 28, 10));
+
+					TextExames.setIcon(imageIconExames);
+					
+					TextExames.setName("nao");
+				}
+			}
+		});
+
+		//***********************************************************************************************************************************************	
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border, " Analise Quantitativa ",2,TitledBorder.CENTER);	
+
+		JScrollPane scrollAnaliseQuantitativa = new JScrollPane(analiseQuantitativa);
+
+		scrollAnaliseQuantitativa.setBorder(titledBorder);
+
+		scrollAnaliseQuantitativa.setViewportView(analiseQuantitativa);
+
+		scrollAnaliseQuantitativa.setAutoscrolls(true);
+
+		scrollAnaliseQuantitativa.setName("analiseQuantitativa");
+
+		scrollAnaliseQuantitativa.setBounds(1350, 245, 250, 300);
+
+		scrollAnaliseQuantitativa.setAlignmentX(10);
+
+		scrollAnaliseQuantitativa.setAlignmentY(10);
+
+		return scrollAnaliseQuantitativa;
+	}
+
+}

@@ -1,0 +1,49 @@
+package com.br.meta.ecm.painel;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+public class PainelDadosProposta {
+
+	final JPanel dadosDaProposta = new JPanel();
+
+	public JScrollPane dadosDaProposta() {
+
+		dadosDaProposta.setLayout(new GridLayout(0, 1));
+
+		dadosDaProposta.setAutoscrolls(true);
+
+		dadosDaProposta.setName("dadosDaProposta");
+
+		dadosDaProposta.setToolTipText(" Informação da Proposta ");
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border, " Informação da Proposta ",2,TitledBorder.CENTER);	
+
+		JScrollPane scrollDadosDaProposta = new JScrollPane(dadosDaProposta);
+
+		scrollDadosDaProposta.setBorder(titledBorder);
+
+		scrollDadosDaProposta.setViewportView(dadosDaProposta);
+
+		scrollDadosDaProposta.setAutoscrolls(true);
+
+		scrollDadosDaProposta.setName("dadosDaProposta");
+
+		scrollDadosDaProposta.setBounds(20, 565, 310, 340);
+
+		scrollDadosDaProposta.setAlignmentX(10);
+
+		scrollDadosDaProposta.setAlignmentY(10);
+
+		return scrollDadosDaProposta;
+	}
+
+}

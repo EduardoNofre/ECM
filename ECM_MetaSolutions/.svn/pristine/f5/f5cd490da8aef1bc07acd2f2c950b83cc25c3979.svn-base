@@ -1,0 +1,181 @@
+package com.br.meta.ecm.painel;
+
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+public class PainelCheckList {
+	
+	final static JPanel analiseQuantitativa = new JPanel();
+	
+	public static JLabel labelProposta; 
+	public static JLabel labelDocumento;
+	public static JLabel labelIconimageIconExames;
+	public static JLabel labelconComprovante;	
+	
+	public static ImageIcon imageIconProposta;
+	public static ImageIcon imageIconDocumento;
+	public static ImageIcon imageIconComprovante;
+	public static ImageIcon imageIconExames;
+
+	public JScrollPane checkListQuestions() {
+
+
+		analiseQuantitativa.setLayout(new GridBagLayout());
+		
+		GridBagConstraints c = new GridBagConstraints();
+
+		analiseQuantitativa.setAutoscrolls(true);
+
+		analiseQuantitativa.setName("analiseQuantitativaPainel");
+
+		analiseQuantitativa.setToolTipText("Analise Quantitativa");	
+		
+		LineBorder border = new LineBorder(Color.GRAY);
+				
+
+		//***********************Proposta****************************************************************************************************
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		
+
+		imageIconProposta = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconProposta.setImage(imageIconProposta.getImage().getScaledInstance(28, 28, 10));
+
+		labelProposta = new JLabel(imageIconProposta);
+
+		analiseQuantitativa.add(labelProposta);		
+
+		JLabel TextProposta= new JLabel("validação da proposta");
+		
+		TextProposta.setBorder(border);		
+
+		analiseQuantitativa.add(TextProposta,c);
+		
+		TextProposta.addMouseListener(new MouseAdapter() 
+		{
+		    @Override
+		    public void mouseClicked(MouseEvent e) 
+		    {
+		       System.out.println(" testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");          
+		    }
+		});
+
+		//********************Documento*******************************************************************************************************	
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+
+		imageIconDocumento = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconDocumento.setImage(imageIconDocumento.getImage().getScaledInstance(28, 28, 10));
+
+		labelDocumento = new JLabel(imageIconDocumento);
+
+		analiseQuantitativa.add(labelDocumento);		
+
+		JLabel TextDocumento = new JLabel("validação da documento");
+
+		analiseQuantitativa.add(TextDocumento,c);
+		
+		
+		TextDocumento.addMouseListener(new MouseAdapter() 
+		{
+		    @Override
+		    public void mouseClicked(MouseEvent e) 
+		    {
+		       System.out.println(" testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");          
+		    }
+		});
+
+
+		//********************Comprovante******************************************************************************************************		
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+		
+		imageIconComprovante = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconComprovante.setImage(imageIconComprovante.getImage().getScaledInstance(28, 28, 10));
+
+		labelconComprovante = new JLabel(imageIconComprovante);
+
+		analiseQuantitativa.add(labelconComprovante);		
+
+		JLabel TextComprovante = new JLabel("validação do comprovante");
+
+		analiseQuantitativa.add(TextComprovante,c);
+		
+		TextComprovante.addMouseListener(new MouseAdapter() 
+		{
+		    @Override
+		    public void mouseClicked(MouseEvent e) 
+		    {
+		       System.out.println(" testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");          
+		    }
+		});
+
+
+		//********************Exames*******************************************************************************************************************	
+
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.gridwidth = GridBagConstraints.REMAINDER;
+
+		imageIconExames = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 no.png");
+
+		imageIconExames.setImage(imageIconExames.getImage().getScaledInstance(28, 28, 10));
+
+		labelIconimageIconExames = new JLabel(imageIconExames);
+
+		analiseQuantitativa.add(labelIconimageIconExames);		
+
+		JLabel TextExames = new JLabel("validação da Exames");
+
+		analiseQuantitativa.add(TextExames,c);
+		
+		
+		TextExames.addMouseListener(new MouseAdapter() 
+		{
+		    @Override
+		    public void mouseClicked(MouseEvent e) 
+		    {
+		       System.out.println(" testeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");          
+		    }
+		});
+
+		//***********************************************************************************************************************************************	
+		
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border, " Analise Quantitativa ",2,TitledBorder.CENTER);	
+
+		JScrollPane scrollAnaliseQuantitativa = new JScrollPane(analiseQuantitativa);
+
+		scrollAnaliseQuantitativa.setBorder(titledBorder);
+
+		scrollAnaliseQuantitativa.setViewportView(analiseQuantitativa);
+
+		scrollAnaliseQuantitativa.setAutoscrolls(true);
+
+		scrollAnaliseQuantitativa.setName("analiseQuantitativa");
+
+		scrollAnaliseQuantitativa.setBounds(1350, 245, 250, 300);
+
+		scrollAnaliseQuantitativa.setAlignmentX(10);
+
+		scrollAnaliseQuantitativa.setAlignmentY(10);
+
+		return scrollAnaliseQuantitativa;
+	}
+
+}

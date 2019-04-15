@@ -1,0 +1,74 @@
+/**
+ * 
+ */
+package com.br.meta.ecm.view;
+
+import java.awt.Color;
+import java.awt.Label;
+import java.awt.TextField;
+import java.io.IOException;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
+
+/**
+ * @author eduardo
+ *
+ */
+public class FrameLogin {
+
+	public static JFrame criarJPanelLogin() throws IOException {
+
+		// views
+		JFrame frameLogin = new JFrame();
+		JPanel jPanelLogin = new JPanel();
+		JPanel jPanelLogins = new JPanel();
+
+		// borda
+		LineBorder border = new LineBorder(Color.BLACK);
+
+		// labels
+
+		Label titulo = new Label("informe o usuario e senha");
+		Label usuario = new Label("Usuario");
+		Label senha = new Label("Senha");
+
+		TextField tituloTxt = new TextField("", 20);
+		TextField usuarioTxt = new TextField("", 20);
+		TextField senhaTxt = new TextField("", 20);
+
+		// logo
+		Icon icon = new ImageIcon("icon.gif");
+
+		jPanelLogin.add(titulo);
+		jPanelLogin.setBackground(new java.awt.Color(255, 255, 255));
+
+		jPanelLogins.setBackground(new java.awt.Color(255, 255, 255));
+		jPanelLogins.setBorder(border);
+		jPanelLogins.setBounds(80, 100, 200, 150);
+
+		jPanelLogins.add(usuario);
+		jPanelLogins.add(usuarioTxt);
+
+		jPanelLogins.add(senha);
+		jPanelLogins.add(senhaTxt);
+
+		frameLogin.add(jPanelLogins);
+		frameLogin.add(jPanelLogin);
+
+		return frameLogin;
+
+	}
+
+	public static void main(String[] args) throws IOException {
+
+		JFrame frame = criarJPanelLogin();
+		frame.setSize(400, 400);
+		frame.setVisible(true);
+
+	}
+
+}

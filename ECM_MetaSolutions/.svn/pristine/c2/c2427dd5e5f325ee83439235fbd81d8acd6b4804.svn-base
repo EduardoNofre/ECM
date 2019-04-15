@@ -1,0 +1,55 @@
+package com.br.meta.ecm.controle;
+
+import javax.swing.ImageIcon;
+
+import com.br.meta.ecm.painel.PainelAnaliseQuantitativa;
+
+public class PainelQuantitativaAtualizarCheckImagemYes {
+
+	public void atualizaImgYes(String panelUpdateImage){	
+
+
+		if(panelUpdateImage.equals("propostasPainel")){
+
+			PainelAnaliseQuantitativa.imageIconProposta = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 yes.png");	
+
+			PainelAnaliseQuantitativa.imageIconProposta.setImage(PainelAnaliseQuantitativa.imageIconProposta.getImage().getScaledInstance(28, 28, 10));
+
+			PainelAnaliseQuantitativa.labelProposta.setIcon(PainelAnaliseQuantitativa.imageIconProposta);	
+
+		}
+
+		if(panelUpdateImage.equals("documentosPainel")){
+
+			PainelAnaliseQuantitativa.imageIconDocumento = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 yes.png");	
+
+			PainelAnaliseQuantitativa.imageIconDocumento.setImage(PainelAnaliseQuantitativa.imageIconDocumento.getImage().getScaledInstance(28, 28, 10));
+
+			PainelAnaliseQuantitativa.labelDocumento.setIcon(PainelAnaliseQuantitativa.imageIconDocumento);	
+
+		}
+		if(panelUpdateImage.equals("comprovanteDeResidenciaPainel")){
+
+			PainelAnaliseQuantitativa.imageIconComprovante = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 yes.png");	
+
+			PainelAnaliseQuantitativa.imageIconComprovante.setImage(PainelAnaliseQuantitativa.imageIconComprovante.getImage().getScaledInstance(28, 28, 10));
+
+			PainelAnaliseQuantitativa.labelconComprovante.setIcon(PainelAnaliseQuantitativa.imageIconComprovante);	
+
+		}
+
+		if(panelUpdateImage.equals("examesMedicosPainel")){
+
+			PainelAnaliseQuantitativa.imageIconExames = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\01 yes.png");	
+
+			PainelAnaliseQuantitativa.imageIconExames.setImage(PainelAnaliseQuantitativa.imageIconExames.getImage().getScaledInstance(28, 28, 10));
+
+			PainelAnaliseQuantitativa.labelIconimageIconExames.setIcon(PainelAnaliseQuantitativa.imageIconExames);	
+
+		}
+
+
+
+	}
+
+}

@@ -1,0 +1,304 @@
+package com.br.meta.ecm.view;
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragGestureRecognizer;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DragSourceContext;
+import java.awt.dnd.DragSourceDragEvent;
+import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
+import java.awt.dnd.DragSourceListener;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetDragEvent;
+import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
+import java.awt.dnd.DropTargetListener;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+public class FrameCheckList implements DragGestureListener, DragSourceListener,DropTargetListener, Transferable {
+	
+
+	Object object;
+	
+	JPanel origem = new JPanel();
+	
+	static FrameCheckList frameCheckList;
+	
+	static final DataFlavor[] supportedFlavors = { null };
+	
+	static {
+
+		try {
+
+			supportedFlavors[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+
+	@Override
+	public Object getTransferData(DataFlavor flavor)throws UnsupportedFlavorException, IOException {
+
+		if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+
+			return object;
+
+		} else {
+
+			return null;
+		}
+	}
+
+	@Override
+	public DataFlavor[] getTransferDataFlavors() {
+		return supportedFlavors;
+	}
+
+	@Override
+	public boolean isDataFlavorSupported(DataFlavor flavor) {
+		return flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType);
+	}
+
+	@Override
+	public void dragEnter(DropTargetDragEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragExit(DropTargetEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragOver(DropTargetDragEvent ev) {
+		object = ev.getSource();
+		
+	}
+
+	@Override
+	public void drop(DropTargetDropEvent event) {
+
+		event.acceptDrop(event.getDropAction());//
+
+		try {
+
+			Object target = event.getSource(); //
+
+			Object source = event.getTransferable().getTransferData(supportedFlavors[0]);
+
+			Component component = ((DragSourceContext) source).getComponent();
+
+			Container origemDragAndDrop = component.getParent();
+
+			Container destinoDragAndDrop = (Container) ((DropTarget) target).getComponent();
+
+
+			
+			EventQueue.invokeLater(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+
+				}
+			});
+			
+			destinoDragAndDrop.add(component);
+
+			origemDragAndDrop.revalidate();
+
+			origemDragAndDrop.repaint();
+
+			destinoDragAndDrop.revalidate();
+
+			destinoDragAndDrop.repaint();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		event.dropComplete(true);
+	}
+
+	@Override
+	public void dropActionChanged(DropTargetDragEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragDropEnd(DragSourceDropEvent dsde) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragEnter(DragSourceDragEvent dsde) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragExit(DragSourceEvent dse) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragOver(DragSourceDragEvent dsde) {
+		object = dsde.getSource();
+		
+	}
+
+	@Override
+	public void dropActionChanged(DragSourceDragEvent dsde) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dragGestureRecognized(DragGestureEvent dge) {
+		dge.startDrag(null, this, this);
+		
+	}
+	
+	/**
+	 * 
+	 * @return JScrollPane
+	 * 
+	 *         Este metodo carrega os contrato nos paineis, buscando em um
+	 *         diretorio especificio.
+	 * 
+	 */
+
+	private JScrollPane contrato() {
+
+		origem.setLayout(new GridLayout(1, 0));
+
+		origem.setToolTipText(" Origem ");
+
+		origem.setName("OrigemPainel");
+
+		File imageDiretorio = new File("C:\\DesenhoRetangulo\\");
+
+		File files[] = imageDiretorio.listFiles();
+
+		DragSource dragSource = new DragSource();
+
+		frameCheckList = new FrameCheckList();
+
+		int contadorDePaginas = 1;
+
+		for (File arq : files) {
+
+			ImageIcon img = new ImageIcon(arq.getAbsolutePath());
+
+			img.setImage(img.getImage().getScaledInstance(80, 130, 80));
+
+			JLabel adcionaImagem = new JLabel(img);
+
+			DragSource ds1 = new DragSource();
+
+			DragGestureRecognizer dragRecognizer = dragSource.createDefaultDragGestureRecognizer(adcionaImagem,DnDConstants.ACTION_MOVE, frameCheckList);
+
+			origem.add(adcionaImagem);
+
+			adcionaImagem.setToolTipText(String.valueOf(contadorDePaginas));
+
+			contadorDePaginas++;
+
+		}
+
+		DropTarget dropTargetOrigem = new DropTarget(origem,DnDConstants.ACTION_MOVE, frameCheckList);
+
+		JScrollPane scrollPaneOrigem = new JScrollPane(origem);
+
+		scrollPaneOrigem.setViewportView(origem);
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border,"Contrato", 2, TitledBorder.CENTER);
+
+		scrollPaneOrigem.setBackground(new java.awt.Color(255, 255, 255));
+
+		scrollPaneOrigem.setBorder(titledBorder);
+
+		scrollPaneOrigem.setToolTipText("Image");
+
+		scrollPaneOrigem.setBounds(10, 120, 1630, 160);
+
+		int height = (int) origem.getPreferredSize().getHeight();
+
+		scrollPaneOrigem.getVerticalScrollBar().setValue(2500);
+
+		return scrollPaneOrigem;
+	}
+	
+	private static JPanel fundoPainelChk() {
+
+		JPanel pss = new JPanel();
+
+		pss.setBackground(new java.awt.Color(255, 255, 255));
+
+		return pss;
+	}
+	
+	
+	public static JFrame principalFrameCheckList() {
+
+		JFrame frame = new JFrame();
+		FrameCheckList frameCheckLists = new FrameCheckList();
+
+		// logo
+		JPanel LogoMetaJpanel = new JPanel();
+		ImageIcon img = new ImageIcon("C:\\Ambiente\\SideEffect\\ECM_MetaSolutions\\src\\com\\br\\meta\\ecm\\img\\logo.gif");
+		JLabel logoMeta = new JLabel(img);
+		LogoMetaJpanel.add(logoMeta);
+		LogoMetaJpanel.setBackground(new java.awt.Color(255, 255, 255));
+		LogoMetaJpanel.setBounds(10, 10, 300, 100);
+
+		JScrollPane origemJsp = frameCheckLists.contrato();
+		JPanel fundoChk = frameCheckLists.fundoPainelChk();
+
+		frame.add(origemJsp);
+		frame.add(LogoMetaJpanel);
+		frame.add(fundoChk);
+
+		return frame;
+	}
+	
+	
+	public void iniChk() {
+
+		JFrame frame = principalFrameCheckList();
+		frame.setSize(1665, 1000);
+		frame.setVisible(true);
+
+	}
+	
+	
+	
+	
+}

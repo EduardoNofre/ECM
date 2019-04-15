@@ -1,0 +1,55 @@
+package com.br.meta.ecm.painel;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+
+import javax.swing.BorderFactory;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import com.br.meta.ecm.view.FramePrincipal;
+
+public class PainelExames {
+
+	JPanel examesMedicos = new JPanel();
+	
+	public JScrollPane examesMedicosPainel(FramePrincipal dndListener) {
+
+		examesMedicos.setLayout(new GridLayout(0, 1));
+
+		examesMedicos.setAutoscrolls(true);
+
+		examesMedicos.setName("examesMedicosPainel");
+
+		examesMedicos.setToolTipText("Exames Medicos");
+
+		examesMedicos.setBackground(new java.awt.Color(255, 255, 255));
+
+		DropTarget dropTarget1 = new DropTarget(examesMedicos, DnDConstants.ACTION_MOVE,dndListener);
+
+		JScrollPane scrollExamesMedicos = new JScrollPane(examesMedicos);
+
+		scrollExamesMedicos.setViewportView(examesMedicos);
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border, "Exames medicos",2,TitledBorder.CENTER);
+
+		scrollExamesMedicos.setAutoscrolls(true);
+
+		scrollExamesMedicos.setBorder(titledBorder);
+
+		scrollExamesMedicos.setBounds(1350, 750, 150, 190);
+
+		scrollExamesMedicos.setAlignmentX(10);
+
+		scrollExamesMedicos.setAlignmentY(10);
+
+		return scrollExamesMedicos;
+	}
+
+}

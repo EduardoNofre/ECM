@@ -1,0 +1,88 @@
+package com.br.meta.ecm.painel;
+
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureRecognizer;
+import java.awt.dnd.DragSource;
+import java.awt.dnd.DropTarget;
+import java.io.File;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+
+import com.br.meta.ecm.view.FramePrincipal;
+
+public class PainelOrigem {
+
+	JPanel origem = new JPanel();
+
+	public JScrollPane origemImage(FramePrincipal dndListener) {
+
+		origem.setLayout(new GridLayout(0, 1));	
+
+		origem.setToolTipText(" Origem ");
+
+		origem.setName("OrigemPainel");
+
+		File imageDiretorio = new File("C:\\DesenhoRetangulo\\");
+
+		File files[] = imageDiretorio.listFiles();
+
+		DragSource dragSource = new DragSource();
+
+		dndListener = new FramePrincipal();
+
+		int contadorDePaginas = 1;
+
+		for (File arq : files) {
+
+			ImageIcon img = new ImageIcon(arq.getAbsolutePath());
+
+			img.setImage(img.getImage().getScaledInstance(100, 150, 100));
+
+			JLabel adcionaImagem = new JLabel(img);
+
+			DragSource ds1 = new DragSource();
+
+			DragGestureRecognizer dragRecognizer  = dragSource.createDefaultDragGestureRecognizer(adcionaImagem,  DnDConstants.ACTION_MOVE, dndListener);			
+
+			origem.add(adcionaImagem);	
+
+			adcionaImagem.setToolTipText(String.valueOf(contadorDePaginas));	
+
+			contadorDePaginas++;			
+
+		}
+
+		DropTarget dropTargetOrigem = new DropTarget(origem, DnDConstants.ACTION_MOVE,dndListener);
+
+		JScrollPane scrollPaneOrigem = new JScrollPane(origem);
+
+		scrollPaneOrigem.setViewportView(origem);
+
+		LineBorder border = new LineBorder(Color.GRAY);
+
+		TitledBorder titledBorder = BorderFactory.createTitledBorder(border, "Contrato",2,TitledBorder.CENTER);
+
+		scrollPaneOrigem.setBackground(new java.awt.Color(255, 255, 255));
+
+		scrollPaneOrigem.setBorder(titledBorder);
+
+		scrollPaneOrigem.setToolTipText("Image");
+
+		scrollPaneOrigem.setBounds(100, 60, 150, 845);
+
+		int height = (int) origem.getPreferredSize().getHeight();
+
+		scrollPaneOrigem.getVerticalScrollBar().setValue(1300);
+
+		return scrollPaneOrigem;
+	}
+
+}
